@@ -55,6 +55,22 @@ Glasshouse Home displays a clock and date (following the TV's 12-hour or 24-hour
 
     The top strip stays empty until the saved layout loads. Switching **Last watched** off leaves the clock in place.
 
+-   **Clock and rows along the bottom**
+
+    ---
+
+    **Clock and date** is on by default; switched off, its space stays empty, so the rows do not move. **Rows along the bottom** puts the rows of apps and inputs along the bottom of the screen, as on LG's Home, rather than in the middle. It is off by default.
+
+    ![Glasshouse Home with the clock off and the rows along the bottom](../screenshots/home-bottom.jpg)
+
+-   **Alternative View**
+
+    ---
+
+    A smaller clock on the right, with Last watched and the Picture details plate to its left, and the rows as rounded, translucent tiles. Row titles show only while arranging, so **App count** is greyed out in this view. It is off by default, and works with **Rows along the bottom** and the other switches. Thanks to @wkirby86.
+
+    ![Glasshouse Home in Alternative View with the rows along the bottom](../screenshots/home-alternative.jpg)
+
 -   **Fade in and out**
 
     ---
@@ -80,14 +96,23 @@ LG's search needs the TV online and LG's search server (`gb.nextlgsdp.com` on a 
 
 ## Wallpapers
 
-By default, Glasshouse Home uses a pure `#000` OLED black background (and leaves the TV's [screen saver](screen-savers.md) untouched). A picture can be set for each of four times of day: **Morning** (06:00 to 11:00), **Afternoon** (11:00 to 17:00), **Evening** (17:00 to 21:00) and **Night** (21:00 to 06:00).
+By default, Glasshouse Home uses a pure `#000` OLED black background (and leaves the TV's [screen saver](screen-savers.md) untouched). It can instead show a picture for each of four times of day: **Morning** (06:00 to 11:00), **Afternoon** (11:00 to 17:00), **Evening** (17:00 to 21:00) and **Night** (21:00 to 06:00).
+
+The **Wallpaper** section offers four choices:
+
+* **Black**, the default: no picture.
+* **Landscape**, a loch at four times of day, and **Abstract**, four flowing abstract pictures. A set is downloaded to the TV when it is chosen, about 820 KB, from [glasshouse-wallpapers](https://github.com/rorygallagher2024/glasshouse-wallpapers), so it adds nothing to the Glasshouse download. Only the chosen set is kept on the TV.
+* **Your own**: pictures uploaded from the browser, one for each time of day. They are kept while a set or Black is chosen, and come back with **Your own**. Uploading a picture chooses **Your own**.
 
 The web dashboard's **Wallpaper** section shows the day as a strip from midnight to midnight, each time of day filled with its picture across its hours and a marker at the time now, and below it each time of day as a small Glasshouse Home: its picture behind the clock in the chosen text colour, so how readable the clock will be shows before it is on the TV. The time of day showing now is marked **Now**.
 
+With **Your own** chosen:
+
 * Choosing a time of day, on the strip or its preview, or dropping an image on it, sets its picture. JPEG, PNG and WebP images up to 25 MB are taken; the browser scales each to fit 1920 × 1080 as a JPEG before saving it to `/var/lib/tvweb/home-wallpaper-uploads` on the TV.
 * **Replace** and **Remove** under a time of day change or remove its picture alone; one without a picture has the black background.
-* **Add example pictures** fills every time of day without a picture from an example set, a loch at four times of day, and leaves the ones already chosen. The set is downloaded to the TV only when the button is pressed, about 820 KB in all, from [glasshouse-wallpapers](https://github.com/rorygallagher2024/glasshouse-wallpapers). The button is hidden once every time of day has a picture.
 * **Remove all** puts the black background back for every time of day.
+
+The TV app's **Wallpaper** row moves through the four choices with OK.
 
 === "Afternoon wallpaper"
 
@@ -148,7 +173,7 @@ Rows and tiles can be arranged from the **web dashboard**, the **TV app**, or **
 
 The Home tab's **Home customisation** section holds what applies to whichever Home is the TV's, in one column with each switch on the right:
 
-* While Glasshouse Home is on: **Open Home at power-on**, Glasshouse Home's own options (**Hide LG's Home while the TV starts**, **Picture details**, **Last watched**, **App count**, **CEC addresses**, **Search**, **Fade in and out**).
+* While Glasshouse Home is on: **Open Home at power-on**, Glasshouse Home's own options (**Hide LG's Home while the TV starts**, **Picture details**, **Clock and date**, **Rows along the bottom**, **Alternative View**, **Last watched**, **App count**, **CEC addresses**, **Search**, **Fade in and out**).
 * While LG's Home is: **Open Home at power-on**, **Home screen layout** and **Hide home screen system apps**.
 
 Each appears where the TV has it. A TV Glasshouse Home is not offered on, such as a B8 with webOS 4.4, still has the Home tab for these; there it holds Open Home at power-on and Hide home screen system apps. The TV app's Home section has the same rows.

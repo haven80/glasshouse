@@ -18,6 +18,17 @@ are gone from the TV app's System tab, and a failed read leaves no stale
 readings. The web tab removes stale controls after a failed read and restores
 them after a successful retry.
 
+`test-lgsettings.js` checks that picture writes refuse hidden settings and
+inactive choices, alongside locked rows and values outside the TV's range, and
+that a TV which describes none of its picture settings is offered none, and
+that colour management follows Colour adjustment where the TV offers User
+Selection and is greyed out in Game mode.
+
+The TV dashboard check adjusts two picture sliders before the first write
+answers. Both changes must be sent, including when the first write is refused
+or its connection fails. With no picture settings offered, neither dashboard
+shows the Picture tab.
+
 [`checks.yml`](https://github.com/rorygallagher2024/glasshouse/blob/main/.github/workflows/checks.yml) runs these on each pull request and each merge to main.
 
 | Check | What it catches |
@@ -115,7 +126,7 @@ Scrolling checks, on a row of 30 apps under the pointer, cover hovering a tile l
 
 Home colour checks cover custom accents matching the stylesheet's original colours, changes and reset arriving through the heartbeat, and malformed colour values being discarded without stopping the server.
 
-Home visibility checks delay the layout reply behind the source reply: last watched stays hidden until its saved switch is known and updates as soon as a changed layout arrives. They also cover app counts, CEC addresses, older layouts with no switches, and the clock keeping its place. `test-home.js` covers saving each switch, switching them back on and ignoring non-boolean updates.
+Home visibility checks delay the layout reply behind the source reply: last watched stays hidden until its saved switch is known and updates as soon as a changed layout arrives. They also cover app counts, CEC addresses, older layouts with no switches, the clock keeping its place, and with the clock switched off and the rows along the bottom, the clock hidden and the rows lower, and in Alternative View the clock right of Last watched and no row titles. `test-home.js` covers saving each switch, switching them back on and ignoring non-boolean updates.
 
 The Home availability check covers a TV with neither Glasshouse Home nor LG's Home's options, which has no Home tab; one with LG's Home's options alone, which shows them, Open Home at power-on usable among them, without Glasshouse Home's switch or options; and Glasshouse Home switched on, which leaves LG's Home's layout and hidden system apps out. `test-home-lg-options.js` checks the server's side: the Home tab offered for hiding system apps on webOS 4.4, and for Open Home at power-on alone, the options only sent when asked for, no tab with none of them, and hiding system apps neither offered nor switched on under Glasshouse Home. `test-tile-hiding-handover.js` checks its handover to Glasshouse Home: the apps it hid hidden there, those in More apps kept, and sam never restarted for it.
 
@@ -193,7 +204,7 @@ Home recovery checks cover a switch-off cut short, failed layout restoration and
 console on the same port select their own device IDs, a direct source selects
 its ID, and missing or unusable IDs and non-CEC inputs open the port alone.
 
-`test-home-wallpaper-upload.js` exercises the real HTTP boundary: rejected and interrupted uploads preserve the previous image, concurrent uploads are refused, the lock is released after an abort, an uploaded JPEG survives reinitialisation and is served with its image type, and one time of day's picture is removed alone, an unknown one refused. The example set, with the download stubbed, fills only the times of day without a picture, and a picture that fails its checksum or download is not kept and releases the lock. The dashboard check chooses Morning and uploads to it, preparing a PNG as JPEG, shows the pending upload in a second tab and the picture once done, drops an image on Evening, removes Morning alone and then all of them.
+`test-home-wallpaper-upload.js` exercises the real HTTP boundary: rejected and interrupted uploads preserve the previous image, concurrent uploads are refused, the lock is released after an abort, an uploaded JPEG survives reinitialisation and is served with its image type, and one time of day's picture is removed alone, an unknown one refused. With the download stubbed, a chosen set is fetched from its tag and not again once on the TV, the owner's own pictures are kept while it shows, a picture that fails its checksum or download is not kept and leaves the choice as it was, and an older install's four example pictures become the landscape set while other uploads become the owner's own. The dashboard check chooses **Your own**, then Morning and uploads to it, preparing a PNG as JPEG, shows the pending upload in a second tab and the picture once done, drops an image on Evening, removes Morning alone and then all of them.
 
 `test-home-recent-apps.js` exercises the recent-app HTTP routes: refused and
 unconfirmed stops retain their cards for retry, unavailable running lists
